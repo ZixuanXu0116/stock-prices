@@ -199,6 +199,22 @@ async function load(f){
   return r.json();
 }
 
+// 把 2026-08-19T17:07:10Z 这种机器格式，变成看板前的人能直接读的时间。
+// 用「看的人自己的时区」，因为 UTC 对谁都不直观；
+// 时区和美东不一样时才补一句美东，一样的话补了反而像重复。
+function fmtTime(x){
+  const d = typeof x === 'number' ? new Date(x*1000) : new Date(x);
+  if (isNaN(d)) return String(x);
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const t  = d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit',hour12:false});
+  const md = d.toLocaleDateString(undefined,{month:'numeric',day:'numeric'});
+  const et = d.toLocaleTimeString('en-US',{timeZone:'America/New_York',
+               hour:'2-digit',minute:'2-digit',hour12:false});
+  const head = sameDay ? `今天 ${t}` : `${md} ${t}`;
+  return et === t ? head : `${head}（美东 ${et}）`;
+}
+
 // 把正文里的百分数做成等宽彩色，让一段话能扫读而不是从头读到尾
 function richNum(raw){
   return esc(raw)
@@ -335,11 +351,11 @@ function chart(curve, live){
   if(missing.length) out.push(`<div class="banner"><b>⚠️ 持仓 ${missing.join('、')} 不在价格文件里</b><br>
     净值无法计算。需把它加进 <code>fetch_prices.py</code> 的 SYMBOLS 列表。</div>`);
   else if(MKT.open && ageMin>120) out.push(`<div class="banner"><b>⚠️ 价格没在更新</b><br>
-    现在美股开着（美东 ${MKT.et}），但价格停在 ${Math.round(ageMin)} 分钟前（${esc(P.fetched_at_utc)}）。
+    现在美股开着（美东 ${MKT.et}），但价格停在 ${Math.round(ageMin)} 分钟前（${fmtTime(P.fetched_at_unix)}）。
     下面的数字不是当前行情，请检查 GitHub Actions 是否还在跑。</div>`);
   else if(!MKT.open) out.push(`<div class="banner ok"><b>美股现在休市</b>（美东 ${MKT.et}）。
     下面是最后一次抓到的价格${MKT.tradingDay?'，也就是今天的收盘价':''}，
-    截至 ${esc(P.fetched_at_utc)}。<b style="color:var(--muted)">这是正常的，不是故障。</b></div>`);
+    截至 ${fmtTime(P.fetched_at_unix)}。<b style="color:var(--muted)">这是正常的，不是故障。</b></div>`);
 
   if(missing.length){ loading.hidden=true; app.hidden=false; app.innerHTML=out.join(''); return; }
 
@@ -360,7 +376,7 @@ function chart(curve, live){
   const gaugePos=Math.max(0,Math.min(100,(net-L.meta.circuit_breaker)/(L.meta.stretch_target-L.meta.circuit_breaker)*100));
 
   document.getElementById('sub').textContent =
-    `${L.meta.start_date} 开始 → ${L.meta.end_date} 结束｜价格截至 ${P.fetched_at_utc}（${Math.round(ageMin)} 分钟前）`;
+    `${L.meta.start_date} 开始 → ${L.meta.end_date} 结束｜价格截至 ${fmtTime(P.fetched_at_unix)}，${Math.round(ageMin)} 分钟前`;
 
   out.push(`<section class="hero">
     <div><p class="eyebrow">总资产</p>
@@ -508,7 +524,7 @@ function chart(curve, live){
         <p class="why">${esc(t.reason||'')}</p></div></li>`).join('') + `</ol></section>`);
 
   out.push(`<footer>▲ 绿色表示赚、▼ 红色表示亏（按美股习惯），涨跌同时标出符号与数值，不单靠颜色区分。<br>
-    数据每 20–30 分钟自动更新，页面每次打开都重新计算。账本最后更新于 ${esc(L.last_updated_utc||'—')}（${esc(L.last_updated_by||'—')}）。<br>
+    数据每 20–30 分钟自动更新，页面每次打开都重新计算。账本最后更新于 ${L.last_updated_utc?fmtTime(L.last_updated_utc):'—'}（${esc(L.last_updated_by||'—')}）。<br>
     这是模拟盘学习记录，<b>不是真钱，也不构成投资建议</b>。</footer>`);
 
   loading.hidden=true; app.hidden=false; app.innerHTML=out.join('');
