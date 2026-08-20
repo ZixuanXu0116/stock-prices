@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-08-20T21:54:58Z",
-  "fetched_at_unix": 1787262898,
+  "fetched_at_utc": "2026-08-20T22:26:13Z",
+  "fetched_at_unix": 1787264773,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 55,
   "symbols_ok": 55,
@@ -13,7 +13,7 @@
       "open": 132.5,
       "high": 135.87,
       "low": 132.23,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "NEM": {
       "price": 127.64,
@@ -23,7 +23,7 @@
       "open": 124.25,
       "high": 128.69,
       "low": 123.71,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "JPM": {
       "price": 351.55,
@@ -53,7 +53,7 @@
       "open": 167.02,
       "high": 168.64,
       "low": 166.07,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "SLB": {
       "price": 53.55,
@@ -103,7 +103,7 @@
       "open": 183.47,
       "high": 184.71,
       "low": 182.66,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "XLF": {
       "price": 56.95,
@@ -113,7 +113,7 @@
       "open": 57.47,
       "high": 57.655,
       "low": 56.91,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "XLV": {
       "price": 172.39,
@@ -123,7 +123,7 @@
       "open": 174.19,
       "high": 175.19,
       "low": 172.34,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "XLU": {
       "price": 43.77,
@@ -213,7 +213,7 @@
       "open": 82.355,
       "high": 82.77,
       "low": 82.15,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "SHY": {
       "price": 82.02,
@@ -233,7 +233,7 @@
       "open": 134.71,
       "high": 135.1699,
       "low": 133.1438,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "IWM": {
       "price": 297.67,
@@ -243,7 +243,7 @@
       "open": 299.27,
       "high": 300.04,
       "low": 297.04,
-      "quote_unix": 1787256000
+      "quote_unix": -10800
     },
     "HYG": {
       "price": 79.56,
@@ -599,18 +599,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 86.21,
+      "price": 86.34,
       "prev_close": 85.83,
-      "change": 0.38,
-      "change_pct": 0.4427,
+      "change": 0.51,
+      "change_pct": 0.5942,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4575.1001,
+      "price": 4575.0,
       "prev_close": 4489.3999,
-      "change": 85.7002,
-      "change_pct": 1.9089,
+      "change": 85.6001,
+      "change_pct": 1.9067,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -631,10 +631,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 98.867,
+      "price": 98.841,
       "prev_close": 98.83,
-      "change": 0.037,
-      "change_pct": 0.0374,
+      "change": 0.011,
+      "change_pct": 0.0111,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
