@@ -29,6 +29,26 @@ body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size
 @media (max-width:600px){.wrap{gap:36px}}
 /* 所有版块其实装在 #app 里，.wrap 的 gap 管不到它们。
    不给 #app 设 gap，版块之间的实际间距是 0px —— 全靠元素自带边距，所以显得挤 */
+.panel{display:flex;flex-direction:column;gap:46px}
+@media (max-width:600px){.panel{gap:36px}}
+/* 底部 tab 栏：固定在视口底部，像 App 一样 */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:50;display:flex;
+  background:var(--surface);border-top:1px solid var(--hairline);
+  padding:5px 4px calc(5px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -1px 3px rgba(0,0,0,.04),0 -8px 24px -12px rgba(0,0,0,.10)}
+.tabs button{flex:1;background:none;border:0;cursor:pointer;font-family:inherit;
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:7px 2px 5px;border-radius:9px;color:var(--faint);
+  font-size:11px;font-weight:600;letter-spacing:.01em;
+  transition:color .15s,background .15s}
+.tabs button .ic{font-size:18px;line-height:1.1}
+.tabs button:hover{background:var(--sunken)}
+.tabs button[aria-selected="true"]{color:var(--accent)}
+.tabs button[aria-selected="true"]::after{content:'';position:absolute;top:0;
+  width:26px;height:2px;border-radius:0 0 2px 2px;background:var(--accent)}
+.tabs button{position:relative}
+/* 给固定栏让出空间，否则最后一节会被挡住 */
+body{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
 #app{display:flex;flex-direction:column;gap:46px}
 @media (max-width:600px){#app{gap:36px}}
 h1,h2{text-wrap:balance;margin:0}
@@ -343,6 +363,8 @@ function chart(curve, live){
   let CAT=null; try{ CAT = await load('catalysts.json'); }catch(e){ CAT=null; }
 
   const Q=P.quotes, out=[];
+  // 四个 tab 的内容桶。按「你想知道什么」分，不是按数据类型分
+  const T={money:[],today:[],learn:[],cal:[]};
   const ageMin=(Date.now()/1000 - P.fetched_at_unix)/60;
   const MKT=marketState();
 
@@ -378,7 +400,7 @@ function chart(curve, live){
   document.getElementById('sub').textContent =
     `${L.meta.start_date} 开始 → ${L.meta.end_date} 结束｜价格截至 ${fmtTime(P.fetched_at_unix)}，${Math.round(ageMin)} 分钟前`;
 
-  out.push(`<section class="hero">
+  T.money.push(`<section class="hero">
     <div><p class="eyebrow">总资产</p>
       <div class="val ${sign(netPct)}">${fmt(net)}</div>
       <div class="chips" style="margin-top:7px">
@@ -400,15 +422,15 @@ function chart(curve, live){
   const liveDate=new Date().toISOString().slice(0,10);
   const hasToday=L.equity_curve.some(r=>r.date===liveDate);
   const JN=[...(L.journal||[])].reverse();   // 最新在最前
-  out.push(`<section class="sec"><h2>今天发生了什么</h2>
+  T.today.push(`<section class="sec"><h2>今天发生了什么</h2>
     <p class="note">当天真正推动市场的事，以及它跟我们手里的股票有什么关系。</p>
     ` + journalCards(JN) + `</section>`);
 
-  out.push(`<section class="sec"><h2>学过的东西</h2>
+  T.learn.push(`<section class="sec"><h2>学过的东西</h2>
     <p class="note">这个项目的头号目标不是赚钱，是每天学到一个真东西。</p>
     ` + lessonCards(JN) + `</section>`);
 
-  out.push(`<section class="sec"><h2>六个月走势</h2>
+  T.money.push(`<section class="sec"><h2>六个月走势</h2>
     <p class="note">三条线都从 $10,000 起跑。真正的问题不是"我们赚了没"，而是"有没有赢过什么都不做"。</p>
     <div class="chartbox">${chart(L.equity_curve, hasToday?null:{t:Date.now(),us:net,voo:bench.VOO,qqq:bench.QQQ})}</div>
     <div class="legend"><span><i style="border-color:var(--s-us)"></i>我们的组合</span>
@@ -418,7 +440,7 @@ function chart(curve, live){
   // 两个口径都要摆出来。只给「从建仓起」会让人困惑：
   // 8/18 QQQ 当日跌 1.69%，但它在我们 10:57 进场前就跌完了，从建仓起算反而是 +0.06%。
   const dayCol = t => Q[t] ? `<span class="chip ${sign(Q[t].change_pct)}">${pct(Q[t].change_pct)}</span>` : '—';
-  out.push(`<section class="sec"><h2>我们 vs 大盘</h2><div class="scroller"><table class="cmp">
+  T.money.push(`<section class="sec"><h2>我们 vs 大盘</h2><div class="scroller"><table class="cmp">
     <thead><tr><th>　</th><th>现在</th><th>从建仓起<br><span class="co">10:57 那一刻</span></th><th>今天<br><span class="co">对昨收</span></th></tr></thead><tbody>
     <tr><td><i class="sw" style="background:var(--s-us)"></i>我们的组合</td><td>${fmt(net)}</td>
       <td class="txt"><span class="chip ${sign(netPct)}">${pct(netPct)}</span></td>
@@ -437,7 +459,7 @@ function chart(curve, live){
     从 10:57 算起它反而是涨的。</p>
     <p class="note"><b>跑赢 VOO 是硬标准。</b>只赚钱不算数——我们赚 4% 而 VOO 赚 7%，这半年的分析就是白费力气。</p></section>`);
 
-  out.push(`<section class="sec"><h2>手里现在有什么</h2><div class="holds">` +
+  T.money.push(`<section class="sec"><h2>手里现在有什么</h2><div class="holds">` +
     rows.map(r=>{
       const w=r.mv/net*100, lvl=r.toStop<2?'risk':r.toStop<5?'warn':'';
       return `<article class="pos"><div class="top">
@@ -489,7 +511,7 @@ function chart(curve, live){
         <td class="num">${f(M[k].price)}</td>
         <td class="num flat">${arrow(chg)} ${txt}</td></tr>`;
     }).join('');
-    out.push(`<section class="sec"><h2>今天大盘怎么样</h2>
+    T.today.push(`<section class="sec"><h2>今天大盘怎么样</h2>
       <p class="note">这些是真实的指数和价格，不是替代品。<b>下半张表不标红绿</b>——利息涨、油价涨对我们是好是坏要看情况，用颜色下结论会误导。</p>
       <div class="scroller"><table><tbody>${idxRows}</tbody></table></div>
       <div class="scroller"><table><tbody>${cmdRows}</tbody></table></div></section>`);
@@ -498,7 +520,7 @@ function chart(curve, live){
   const SECT=[['XLE','能源'],['XLK','科技'],['XLF','金融'],['XLV','医疗'],['XLU','公用事业'],['XLP','必需消费'],
               ['XLY','可选消费'],['XLI','工业'],['XLB','材料'],['XLRE','房地产'],['XLC','通讯服务']]
     .filter(([t])=>Q[t]).map(([t,n])=>({t,n,c:Q[t].change_pct})).sort((a,b)=>b.c-a.c);
-  if(SECT.length) out.push(`<section class="sec"><h2>钱今天流向哪个行业</h2>
+  if(SECT.length) T.today.push(`<section class="sec"><h2>钱今天流向哪个行业</h2>
     <p class="note">11 个行业指数，按今天涨跌排序。<b>排最上和最下的差距越大，说明轮动越剧烈。</b></p>
     <div class="scroller"><table><tbody>` + SECT.map(s=>`<tr><td>${s.n}<span class="co"> ${s.t}</span></td>
       <td class="${sign(s.c)}">${arrow(s.c)} ${pct(s.c)}</td></tr>`).join('') + `</tbody></table></div></section>`);
@@ -507,15 +529,15 @@ function chart(curve, live){
   const MACRO=[['TLT','20年期国债 ETF','利息涨它就跌'],['SHY','短期国债 ETF','和 TLT 一比就是收益率曲线'],
     ['IWM','小盘股','对利率最敏感的一群公司'],['HYG','垃圾债','市场压力的早期警报，常比股市先跌']]
     .filter(([t])=>Q[t]);
-  if(MACRO.length) out.push(`<section class="sec"><h2>几个提前预警的信号</h2><div class="scroller"><table>
+  if(MACRO.length) T.today.push(`<section class="sec"><h2>几个提前预警的信号</h2><div class="scroller"><table>
     <tbody>` + MACRO.map(([t,n,d])=>`<tr><td>${n}<span class="co"> ${t}</span><br>
       <span class="co" style="font-size:11px">${d}</span></td>
       <td class="${sign(Q[t].change_pct)}">${arrow(Q[t].change_pct)} ${pct(Q[t].change_pct)}</td></tr>`).join('') +
     `</tbody></table></div></section>`);
 
-  out.push(catalystList(CAT));
+  T.cal.push(catalystList(CAT));
 
-  out.push(`<section class="sec"><h2>做过的每一笔</h2>
+  T.money.push(`<section class="sec"><h2>做过的每一笔</h2>
     <p class="note">每笔都记着当时的理由。半年后回头看，才知道哪些判断对、哪些错。</p>
     <ol class="tl">` + [...L.trades].reverse().map(t=>`<li>
       <span class="d">${esc(t.date.slice(5))}${t.time_et?'<br>'+esc(t.time_et):''}</span>
@@ -523,11 +545,34 @@ function chart(curve, live){
         ${esc(t.ticker)} · <span class="num">${t.shares} 股 @ ${fmt(t.price)}</span></span>
         <p class="why">${esc(t.reason||'')}</p></div></li>`).join('') + `</ol></section>`);
 
-  out.push(`<footer>▲ 绿色表示赚、▼ 红色表示亏（按美股习惯），涨跌同时标出符号与数值，不单靠颜色区分。<br>
+  const footer = `<footer>▲ 绿色表示赚、▼ 红色表示亏（按美股习惯），涨跌同时标出符号与数值，不单靠颜色区分。<br>
     数据每 20–30 分钟自动更新，页面每次打开都重新计算。账本最后更新于 ${L.last_updated_utc?fmtTime(L.last_updated_utc):'—'}（${esc(L.last_updated_by||'—')}）。<br>
-    这是模拟盘学习记录，<b>不是真钱，也不构成投资建议</b>。</footer>`);
+    这是模拟盘学习记录，<b>不是真钱，也不构成投资建议</b>。</footer>`;
 
-  loading.hidden=true; app.hidden=false; app.innerHTML=out.join('');
+  const TABS=[['money','💰','我的钱'],['today','📰','今天'],
+               ['learn','📚','学到的'],['cal','📅','日历']];
+  // 记住上次看的那一页——自动刷新会重载页面，不记的话每次都被弹回第一页
+  let cur = sessionStorage.getItem('tab');
+  if(!TABS.some(t=>t[0]===cur)) cur='money';
+
+  app.innerHTML = out.join('')
+    + TABS.map(([k])=>`<div class="panel" data-t="${k}"${k===cur?'':' hidden'}>${T[k].join('')}</div>`).join('')
+    + footer
+    + `<nav class="tabs" role="tablist">` + TABS.map(([k,ic,label])=>
+        `<button role="tab" data-t="${k}" aria-selected="${k===cur}">
+           <span class="ic" aria-hidden="true">${ic}</span>${label}</button>`).join('') + `</nav>`;
+
+  app.addEventListener('click', ev=>{
+    const btn = ev.target.closest('.tabs button'); if(!btn) return;
+    const k = btn.dataset.t;
+    sessionStorage.setItem('tab', k);
+    app.querySelectorAll('.panel').forEach(el=>{ el.hidden = el.dataset.t!==k; });
+    app.querySelectorAll('.tabs button').forEach(el=>
+      el.setAttribute('aria-selected', String(el.dataset.t===k)));
+    window.scrollTo({top:0});
+  });
+
+  loading.hidden=true; app.hidden=false;
 
   // ── 自动刷新 ──
   // 每 2 分钟去看一眼有没有新数据，只在真的抓到新价格时才重载。
