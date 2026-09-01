@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-09-01T20:03:51Z",
-  "fetched_at_unix": 1788293031,
+  "fetched_at_utc": "2026-09-01T22:44:26Z",
+  "fetched_at_unix": 1788302666,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 62,
   "symbols_ok": 62,
@@ -46,9 +46,9 @@
       "quote_unix": 1788292800
     },
     "XOM": {
-      "price": 164.56,
-      "change": 3.61,
-      "change_pct": 2.2429,
+      "price": 164.55,
+      "change": 3.6,
+      "change_pct": 2.2367,
       "prev_close": 160.95,
       "open": 163.6,
       "high": 164.7,
@@ -76,9 +76,9 @@
       "quote_unix": 1788292800
     },
     "QQQ": {
-      "price": 707.77,
-      "change": -8.99,
-      "change_pct": -1.2543,
+      "price": 707.64,
+      "change": -9.12,
+      "change_pct": -1.2724,
       "prev_close": 716.76,
       "open": 707.39,
       "high": 712.3,
@@ -316,9 +316,9 @@
       "quote_unix": 1788292800
     },
     "MU": {
-      "price": 933.38,
-      "change": -25.35,
-      "change_pct": -2.6441,
+      "price": 933.44,
+      "change": -25.29,
+      "change_pct": -2.6379,
       "prev_close": 958.73,
       "open": 941.125,
       "high": 969.44,
@@ -416,9 +416,9 @@
       "quote_unix": 1788292800
     },
     "LLY": {
-      "price": 1159.931236,
-      "change": 3.201236,
-      "change_pct": 0.2767,
+      "price": 1160,
+      "change": 3.27,
+      "change_pct": 0.2827,
       "prev_close": 1156.73,
       "open": 1188,
       "high": 1188.325,
@@ -516,14 +516,14 @@
       "quote_unix": 1788292800
     },
     "PLD": {
-      "price": 139.71,
-      "change": -0.21,
-      "change_pct": -0.1501,
+      "price": 139.68,
+      "change": -0.24,
+      "change_pct": -0.1715,
       "prev_close": 139.92,
       "open": 139.47,
       "high": 140.07,
       "low": 138.66,
-      "quote_unix": 1788292799
+      "quote_unix": 1788292800
     },
     "BAC": {
       "price": 61.99,
@@ -546,9 +546,9 @@
       "quote_unix": 1788292800
     },
     "ORCL": {
-      "price": 141.261,
-      "change": -7.859,
-      "change_pct": -5.2703,
+      "price": 141.32,
+      "change": -7.8,
+      "change_pct": -5.2307,
       "prev_close": 149.12,
       "open": 146.75,
       "high": 146.79,
@@ -576,9 +576,9 @@
       "quote_unix": 1788292800
     },
     "FCX": {
-      "price": 72.48,
-      "change": -3.26,
-      "change_pct": -4.3042,
+      "price": 72.47,
+      "change": -3.27,
+      "change_pct": -4.3174,
       "prev_close": 75.74,
       "open": 73.55,
       "high": 75.5,
@@ -653,10 +653,10 @@
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 16.32,
+      "price": 16.34,
       "prev_close": 14.92,
-      "change": 1.4,
-      "change_pct": 9.3834,
+      "change": 1.42,
+      "change_pct": 9.5174,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
@@ -669,18 +669,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 90.54,
+      "price": 90.82,
       "prev_close": 85.76,
-      "change": 4.78,
-      "change_pct": 5.5737,
+      "change": 5.06,
+      "change_pct": 5.9002,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4373.7002,
+      "price": 4374.0,
       "prev_close": 4431.1001,
-      "change": -57.3999,
-      "change_pct": -1.2954,
+      "change": -57.1001,
+      "change_pct": -1.2886,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -701,10 +701,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 99.69,
+      "price": 99.654,
       "prev_close": 99.43,
-      "change": 0.26,
-      "change_pct": 0.2615,
+      "change": 0.224,
+      "change_pct": 0.2253,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
