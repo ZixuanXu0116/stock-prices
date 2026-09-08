@@ -1,9 +1,9 @@
 {
-  "fetched_at_utc": "2026-09-07T21:43:12Z",
-  "fetched_at_unix": 1788817392,
+  "fetched_at_utc": "2026-09-08T00:00:41Z",
+  "fetched_at_unix": 1788825641,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 62,
-  "symbols_ok": 59,
+  "symbols_ok": 62,
   "quotes": {
     "COP": {
       "price": 134.26,
@@ -465,6 +465,36 @@
       "low": 87.85,
       "quote_unix": 1788552000
     },
+    "COST": {
+      "price": 915.74,
+      "change": -9.67,
+      "change_pct": -1.0449,
+      "prev_close": 925.41,
+      "open": 926.09,
+      "high": 928.04,
+      "low": 914.54,
+      "quote_unix": 1788552000
+    },
+    "CAT": {
+      "price": 813.94,
+      "change": 13.8,
+      "change_pct": 1.7247,
+      "prev_close": 800.14,
+      "open": 802.38,
+      "high": 821,
+      "low": 801,
+      "quote_unix": 1788552000
+    },
+    "GE": {
+      "price": 337.12,
+      "change": 3.64,
+      "change_pct": 1.0915,
+      "prev_close": 333.48,
+      "open": 332.24,
+      "high": 337.21,
+      "low": 332.24,
+      "quote_unix": 1788552000
+    },
     "LIN": {
       "price": 477.57,
       "change": -4.62,
@@ -596,20 +626,7 @@
       "quote_unix": 1788552000
     }
   },
-  "errors": [
-    {
-      "symbol": "COST",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "symbol": "CAT",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "symbol": "GE",
-      "error": "HTTP Error 429: Too Many Requests"
-    }
-  ],
+  "errors": [],
   "macro": {
     "SP500": {
       "price": 7718.6001,
@@ -652,18 +669,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 91.48,
+      "price": 92.53,
       "prev_close": 91.48,
-      "change": 0.0,
-      "change_pct": 0.0,
+      "change": 1.05,
+      "change_pct": 1.1478,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4476.6001,
+      "price": 4472.7002,
       "prev_close": 4429.7998,
-      "change": 46.8003,
-      "change_pct": 1.0565,
+      "change": 42.9004,
+      "change_pct": 0.9684,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
