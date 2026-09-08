@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-09-08T20:06:11Z",
-  "fetched_at_unix": 1788897971,
+  "fetched_at_utc": "2026-09-08T22:54:24Z",
+  "fetched_at_unix": 1788908064,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 64,
   "symbols_ok": 64,
@@ -236,9 +236,9 @@
       "quote_unix": 1788897600
     },
     "IWM": {
-      "price": 294.69,
-      "change": -1.32,
-      "change_pct": -0.4459,
+      "price": 294.67,
+      "change": -1.34,
+      "change_pct": -0.4527,
       "prev_close": 296.01,
       "open": 295.34,
       "high": 296.1,
@@ -406,9 +406,9 @@
       "quote_unix": 1788897600
     },
     "TSLA": {
-      "price": 368.04,
-      "change": 13.96,
-      "change_pct": 3.9426,
+      "price": 368.16,
+      "change": 14.08,
+      "change_pct": 3.9765,
       "prev_close": 354.08,
       "open": 357.095,
       "high": 370,
@@ -673,10 +673,10 @@
       "desc": "Dow 道琼斯工业指数"
     },
     "VIX": {
-      "price": 15.55,
+      "price": 15.72,
       "prev_close": 15.3,
-      "change": 0.25,
-      "change_pct": 1.634,
+      "change": 0.42,
+      "change_pct": 2.7451,
       "symbol": "^VIX",
       "desc": "恐慌指数——低说明市场淡定，高说明在害怕"
     },
@@ -689,18 +689,18 @@
       "desc": "费城半导体指数"
     },
     "WTI": {
-      "price": 93.62,
+      "price": 94.24,
       "prev_close": 91.48,
-      "change": 2.14,
-      "change_pct": 2.3393,
+      "change": 2.76,
+      "change_pct": 3.017,
       "symbol": "CL=F",
       "desc": "WTI 原油期货，美元/桶"
     },
     "GOLD": {
-      "price": 4406.6001,
+      "price": 4394.1001,
       "prev_close": 4429.7998,
-      "change": -23.1997,
-      "change_pct": -0.5237,
+      "change": -35.6997,
+      "change_pct": -0.8059,
       "symbol": "GC=F",
       "desc": "黄金期货，美元/盎司"
     },
@@ -721,10 +721,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 98.863,
+      "price": 98.836,
       "prev_close": 99.16,
-      "change": -0.297,
-      "change_pct": -0.2995,
+      "change": -0.324,
+      "change_pct": -0.3267,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
