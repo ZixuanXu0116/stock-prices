@@ -389,7 +389,8 @@ function chart(curve, live){
     const now=Q[p.ticker].price, mv=p.shares*now, pl=p.shares*(now-p.cost);
     return {...p, now, mv, pl, plPct:(now/p.cost-1)*100, toStop:(now/p.stop_loss-1)*100};
   });
-  const mv=rows.reduce((a,r)=>a+r.mv,0), cash=L.cash, net=mv+cash;
+  // cash_pending = T+1 在途资金：卖出后还没到账的钱，仍是我们的资产，必须算进净值
+  const mv=rows.reduce((a,r)=>a+r.mv,0), cash=L.cash, pending=L.cash_pending||0, net=mv+cash+pending;
   const init=L.meta.initial_capital;
   const bench=Object.fromEntries(Object.entries(L.benchmarks).map(([k,v])=>[k, v.shares*Q[k].price]));
   const netPct=(net/init-1)*100, vooPct=(bench.VOO/init-1)*100, qqqPct=(bench.QQQ/init-1)*100;
@@ -411,6 +412,7 @@ function chart(curve, live){
         <span class="chip ${sign(netPct)}"><span class="l">累计</span>${pct(netPct)}</span>
         <span class="chip ${sign(netPct-vooPct)}"><span class="l">vs VOO</span>${pct(netPct-vooPct)}</span>
         <span class="chip"><span class="l">现金</span>${fmt(cash)}</span>
+        ${pending>0?`<span class="chip"><span class="l">在途</span>${fmt(pending)}</span>`:''}
       </div></div>
     <div class="gauge"><p class="eyebrow">距离目标</p>
       <div class="track"><span class="fill" style="width:${gaugePos}%"></span></div>
@@ -482,7 +484,13 @@ function chart(curve, live){
       <p class="co" style="margin:0">留着等事件密集期。中东、财报、FOMC 随时可能给出更好的价格。</p>
       <div><div class="bar"><i style="width:${(cash/net*100).toFixed(1)}%"></i></div>
         <div class="cap"><span>占总资产</span><span class="num">${(cash/net*100).toFixed(1)}%</span></div></div>
-    </article></div></section>`);
+    </article>` +
+    (pending>0?`<article class="pos"><div class="top"><div><span class="sym">T+1</span><br><span class="co">在途资金（卖出待到账）</span></div>
+      <div class="pl flat"><span class="a">${fmt(pending)}</span></div></div>
+      <p class="co" style="margin:0">刚卖出股票收回的钱。按 T+1 规则要下一个交易日早上才到账、才能再用来买入——但它一直都是我们的资产，已算进上面的总资产里。</p>
+      <div><div class="bar"><i style="width:${(pending/net*100).toFixed(1)}%"></i></div>
+        <div class="cap"><span>占总资产</span><span class="num">${(pending/net*100).toFixed(1)}%</span></div></div>
+    </article>`:'') + `</div></section>`);
 
   // ── 板块热力：钱在往哪个行业流 ──
   // ── 大盘：用真实指数/商品/利率，不再是 ETF 的替身 ──
