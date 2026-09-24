@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-09-24T21:15:02Z",
-  "fetched_at_unix": 1790284502,
+  "fetched_at_utc": "2026-09-24T21:35:07Z",
+  "fetched_at_unix": 1790285707,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 64,
   "symbols_ok": 64,
@@ -721,10 +721,10 @@
       "desc": "30 年期美国国债利息，%"
     },
     "DXY": {
-      "price": 101.257,
+      "price": 101.26,
       "prev_close": 101.1,
-      "change": 0.157,
-      "change_pct": 0.1553,
+      "change": 0.16,
+      "change_pct": 0.1583,
       "symbol": "DX-Y.NYB",
       "desc": "美元指数"
     }
