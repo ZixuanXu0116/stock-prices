@@ -1,9 +1,9 @@
 {
-  "fetched_at_utc": "2026-09-25T21:15:59Z",
-  "fetched_at_unix": 1790370959,
+  "fetched_at_utc": "2026-09-25T21:39:42Z",
+  "fetched_at_unix": 1790372382,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 64,
-  "symbols_ok": 60,
+  "symbols_ok": 64,
   "quotes": {
     "COP": {
       "price": 127.3,
@@ -183,6 +183,46 @@
       "open": 41.78,
       "high": 41.795,
       "low": 41.33,
+      "quote_unix": 1790366400
+    },
+    "XLC": {
+      "price": 112.96,
+      "change": -1.03,
+      "change_pct": -0.9036,
+      "prev_close": 113.99,
+      "open": 113.462,
+      "high": 113.52,
+      "low": 112.54,
+      "quote_unix": 1790366400
+    },
+    "GLD": {
+      "price": 393.41,
+      "change": 1.72,
+      "change_pct": 0.4391,
+      "prev_close": 391.69,
+      "open": 392.21,
+      "high": 394.2199,
+      "low": 390.05,
+      "quote_unix": 1790366400
+    },
+    "TLT": {
+      "price": 79.32,
+      "change": -0.1,
+      "change_pct": -0.1259,
+      "prev_close": 79.42,
+      "open": 79.37,
+      "high": 79.46,
+      "low": 78.83,
+      "quote_unix": 1790366400
+    },
+    "SHY": {
+      "price": 81.21,
+      "change": 0.12,
+      "change_pct": 0.148,
+      "prev_close": 81.09,
+      "open": 81.16,
+      "high": 81.22,
+      "low": 81.13,
       "quote_unix": 1790366400
     },
     "USO": {
@@ -606,24 +646,7 @@
       "quote_unix": 1790366400
     }
   },
-  "errors": [
-    {
-      "symbol": "XLC",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "symbol": "GLD",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "symbol": "TLT",
-      "error": "HTTP Error 429: Too Many Requests"
-    },
-    {
-      "symbol": "SHY",
-      "error": "HTTP Error 429: Too Many Requests"
-    }
-  ],
+  "errors": [],
   "macro": {
     "SP500": {
       "price": 7743.4102,
