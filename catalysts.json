@@ -293,7 +293,8 @@
       "who": "AI 板块 / META / 软件股 / 我们的 TSM",
       "why": "据 BleepingComputer 报道 OpenAI 将发布常驻式 AI 助手（代号 o）。9/28 这条传闻已让 META -4.79%、MongoDB -19%、ServiceNow/Salesforce/Snowflake 各约 -4%，落地当天是验证「传闻已 price in」还是「利空再下一台阶」的直接考验；也是本次条件计划候选① GOOGL 的触发条件所依赖的事件",
       "confidence": "高",
-      "done": false
+      "done": true,
+      "outcome": "事前预期：据 BleepingComputer 9/27 报道，OpenAI 将发布代号 o 的常驻式 AI 助手，可在关闭 ChatGPT 后继续以云端代理身份处理长周期任务；9/28 市场按这条传闻把 META 砸了 4.79%、ORCL -3.28%。实际（据 CNBC/BGR/9to5Mac 报道）：Altman 主题演讲一次给出 20 多项发布，常驻代理确实存在、名为 dots，可在 ChatGPT 桌面/手机/网页、Slack、Microsoft Teams 乃至语音通话中保持同一份上下文；另发布 Pro 500 高用量订阅档、Ultrafast 速度档（Codex 出词快至 8 倍、API 快至 6 倍）、插件扩展（开发者可把整个应用嵌进 ChatGPT 与 Codex）、以及 OpenAI Private Intelligence 数据管控预览。方向对了，但市场反应与前一天完全相反：META +3.24% 至 738.79 收复 9/28 跌幅的大半，ORCL +3.91%、AVGO +1.58%、MU +1.05%、我们的 TSM +0.90%、SOX +1.32%，AI 电力链 VST +2.04%、CEG +1.59%、GEV +1.34% 同涨。输家是 AAPL -2.66%，据 24/7 Wall St./Yahoo Finance 报道美银警告 Meta 的 Muse 代理会抽走苹果生态的商品发现与交易环节。教训与 8/19、8/20 那两条一致但方向相反：这次是「传闻时按最坏定价、落地后修正」——9/28 的下跌定价的是恐惧，9/29 的上涨定价的是事实。"
     },
     {
       "date": "10/1",
