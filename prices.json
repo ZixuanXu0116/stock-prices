@@ -1,6 +1,6 @@
 {
-  "fetched_at_utc": "2026-11-13T23:05:15Z",
-  "fetched_at_unix": 1794611115,
+  "fetched_at_utc": "2026-11-14T01:05:41Z",
+  "fetched_at_unix": 1794618341,
   "source": "finnhub.io/api/v1/quote + query1.finance.yahoo.com/v8/finance/chart",
   "symbols_requested": 64,
   "symbols_ok": 64,
